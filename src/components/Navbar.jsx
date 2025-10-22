@@ -21,8 +21,8 @@ export default function Navbar({ showImage = true, showBotones = true, children}
                   
                 
       <div className="navbar-actions">
-        <Link to="/registro" className="btn-outline">Regístrate</Link>
-        <Link to="/inicio-sesion" className="btn-primary">Iniciar sesión</Link>
+        <Link to="/registro" className="btn-global">Regístrate</Link>
+        <Link to="/inicio-sesion" className="btn-outline">Iniciar sesión</Link>
       </div>
 
       )}

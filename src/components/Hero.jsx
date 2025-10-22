@@ -22,11 +22,13 @@ export default function Hero({ showTitle = true, showSearch = true, showImage = 
               <BuscadorCard />
             </div>
           )}
+
+                      {children && <div className="hero-children">{children}</div>}
+
         </div>
       </div>
 
 
-            {children && <div className="navbar-extra">{children}</div>}
 
     </section>
   );

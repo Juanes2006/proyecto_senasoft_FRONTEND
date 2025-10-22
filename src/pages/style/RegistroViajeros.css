@@ -1,0 +1,68 @@
+/* Contenedor principal del registro */
+.registro-title {
+  text-align: center;
+  margin: 20px 0;
+}
+
+/* Tarjeta del formulario */
+.registro-card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 15px;
+  max-width: 700px;
+  margin: 20px auto;
+  background-color: #f9f9f9;
+}
+
+/* Botón desplegable */
+.btn-toggle {
+  width: 100%;
+  color: rgb(0, 0, 0);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+
+
+/* Formulario con grid para inputs */
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.registro-form input,
+.registro-form select {
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Botón validar datos */
+.btn-submit {
+  grid-column: span 2;
+  background-color: green;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+/* Botón continuar */
+.continuar-container {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.btn-continuar {
+  padding: 12px 20px;
+  font-size: 16px;
+}

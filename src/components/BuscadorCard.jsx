@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./style/BuscadorCard.css";
+import { Link } from "react-router-dom";  // ✅ Falta esto
+
 
 export default function BuscadorCard() {
   const [tripType, setTripType] = useState("ida-vuelta");
@@ -27,15 +29,21 @@ export default function BuscadorCard() {
       </div>
 
       <div className="search-card">
-        <input type="text" placeholder="Origen" />
-        <input type="text" placeholder="Destino" />
+        <input type="text" placeholder="Origen"  required/>
+        <input type="text" placeholder="Destino"  required/>
         <input type="date" />
-        {tripType === "ida-vuelta" && <input type="date" />}
+        {tripType === "ida-vuelta" && <input type="date" required/>}
         <select>
           <option>1 pasajero</option>
           <option>2 pasajeros</option>
+          <option>3 pasajeros</option>
+          <option>4 pasajeros</option>
+          <option>5 pasajeros</option>
         </select>
-        <button className="btn-primary">Buscar</button>
+       <div className="navbar-actions">
+        <Link to="/vuelos" className="btn-outline">Buscar</Link>
+      </div>
+
       </div>
     </div>
   );

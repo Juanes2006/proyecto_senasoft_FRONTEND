@@ -1,27 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+/* 🎨 PALETA DE COLOR */
 :root {
-  --color-primary: #3A4E7A;
-  --color-accent: #5B7BD5;
-  --color-card-bg: rgba(240, 240, 245, 0.123);
-  --color-border: rgba(255, 255, 255, 0);
-  --color-shadow: rgba(0, 0, 0, 0.1);
+  --color-primary: #3A4E7A; /* Azul grisáceo elegante */
+  --color-accent: #5B7BD5;  /* Azul más vibrante */
+  --color-card-bg: rgba(240, 240, 245, 0.15);
+  --color-border: rgba(255, 255, 255, 0.2);
+  --color-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  --color-text: #2C3340;
 }
+
+/* 🧭 Reset general */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: #F6F7F9;
+  color: var(--color-text);
+}
+
+/* ==========================================================
+   ✈️ CONTENEDOR DEL BUSCADOR
+========================================================== */
 
 .buscador-wrapper {
   position: relative;
   display: inline-block; 
   padding: 3.5rem 2.5rem 2rem; 
   border-radius: 18px;
-  box-shadow: 0 4px 20px var(--color-shadow);
+  box-shadow: var(--color-shadow);
   backdrop-filter: blur(10px);
+  background: var(--color-card-bg);
   margin: 2rem auto;
 }
+
+/* ==========================================================
+   🔘 TIPOS DE VIAJE
+========================================================== */
 
 .trip-type {
   position: absolute;
   top: 10px;
   left: 25px;
   margin-left: 1.2rem;
-  padding-top: 0.3rem;
   display: flex;
   gap: 0.8rem;
   font-size: 1rem;
@@ -54,6 +79,9 @@
   box-shadow: 0 2px 8px rgba(58, 78, 122, 0.3);
 }
 
+/* ==========================================================
+   🔍 CAMPOS DEL BUSCADOR
+========================================================== */
 
 .search-card {
   display: flex;
@@ -73,26 +101,47 @@
   color: var(--color-primary);
   outline: none;
   min-width: 120px;
+  transition: all 0.3s ease;
 }
 
 .search-card input:focus,
 .search-card select:focus {
   border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px rgba(91, 123, 213, 0.2);
 }
 
-.btn-primary {
-  background-color: var(--color-primary);
+/* ==========================================================
+   🔹 BOTÓN DE BUSCAR
+========================================================== */
+
+.btn-outline {
+  background: var(--color-primary);
   color: #fff;
   border: none;
   border-radius: 10px;
   padding: 0.9rem 1.5rem;
-  cursor: pointer;
   font-weight: 600;
-  transition: all 0.3s ease;
+  font-size: 1rem;
+  cursor: pointer;
+  text-decoration: none; 
+  display: inline-block;
+  box-shadow: var(--color-shadow);
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
-.btn-primary:hover {
-  background-color: var(--color-accent);
+.btn-outline:hover {
+  background: var(--color-accent);
+  transform: scale(1.03);
+}
+
+/* ==========================================================
+   🔸 CONTENEDOR BOTÓN
+========================================================== */
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .search-container {
