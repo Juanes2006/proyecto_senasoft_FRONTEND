@@ -1,0 +1,83 @@
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+/* Capa semitransparente para mejorar contraste del texto */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25); /* leve oscuridad para mejorar lectura */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-content {
+  position: relative;
+  text-align: center;
+  z-index: 2;
+  color: white;
+}
+
+.hero-title {
+  font-size: 2.8rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Card */
+.search-card {
+  background: rgba(255, 255, 255, 0.521);
+  backdrop-filter: blur(10px);
+  padding: 2rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  width: fit-content;     
+  max-width: 90vw;         
+  margin: 0 auto;          
+}
+
+
+
+
+.hero h1 {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  margin-bottom: 2rem;
+}
+
+
+@media (max-width: 768px) {
+  .hero {
+    background-size: 120%;
+    background-position: bottom center;
+    padding: 4rem 1rem 6rem;
+  }
+
+  .hero-overlay {
+    padding: 2rem 1rem;
+    width: 95%;
+  }
+
+  .search-card {
+    flex-direction: column;
+  }
+}

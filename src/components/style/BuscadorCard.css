@@ -1,0 +1,102 @@
+:root {
+  --color-primary: #3A4E7A;
+  --color-accent: #5B7BD5;
+  --color-card-bg: rgba(240, 240, 245, 0.123);
+  --color-border: rgba(255, 255, 255, 0);
+  --color-shadow: rgba(0, 0, 0, 0.1);
+}
+
+.buscador-wrapper {
+  position: relative;
+  display: inline-block; 
+  padding: 3.5rem 2.5rem 2rem; 
+  border-radius: 18px;
+  box-shadow: 0 4px 20px var(--color-shadow);
+  backdrop-filter: blur(10px);
+  margin: 2rem auto;
+}
+
+.trip-type {
+  position: absolute;
+  top: 10px;
+  left: 25px;
+  margin-left: 1.2rem;
+  padding-top: 0.3rem;
+  display: flex;
+  gap: 0.8rem;
+  font-size: 1rem;
+  color: var(--color-primary);
+}
+
+.trip-type input[type="radio"] {
+  display: none;
+}
+
+.trip-type label {
+  padding: 0.4rem 1rem;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.trip-type label:hover {
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.trip-type input[type="radio"]:checked + label {
+  background: var(--color-primary);
+  color: white;
+  border-color: var(--color-primary);
+  box-shadow: 0 2px 8px rgba(58, 78, 122, 0.3);
+}
+
+
+.search-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem; 
+  justify-content: center;
+  flex-wrap: nowrap; 
+}
+
+.search-card input,
+.search-card select {
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  border: 1px solid var(--color-border);
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
+  color: var(--color-primary);
+  outline: none;
+  min-width: 120px;
+}
+
+.search-card input:focus,
+.search-card select:focus {
+  border-color: var(--color-accent);
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 0.9rem 1.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--color-accent);
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

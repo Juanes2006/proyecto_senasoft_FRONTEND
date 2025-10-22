@@ -1,0 +1,27 @@
+:root {
+  --bg: #F6F7F9;
+  --surface: #FFFFFF;
+  --muted: #A6B0C0;
+  --text: #2B3340;
+  --primary: #1766E6;
+  --primary-600: #0F4EC1;
+  --accent: #FF7A59;
+  --shadow: 0 6px 24px rgba(16, 24, 40, 0.08);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+button {
+  cursor: pointer;
+  border: none;
+}
