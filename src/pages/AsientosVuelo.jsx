@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./style/AsientosVuelo.css";
-import NavBar from "../components/NavBar";
+import NavBar from "../components/Navbar";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
 // Componente de asiento individual
