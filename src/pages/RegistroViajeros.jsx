@@ -1,20 +1,154 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "../components/NavBar";
-import { Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./style/RegistroViajeros.css";
 
 export default function RegistroViajeros() {
-  const [open, setOpen] = useState(false); // Controla si se despliega
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  const toggleForm = () => {
-    setOpen(!open);
+  // ✅ Obtener datos del componente anterior (AsientosVuelo)
+  const {
+    vueloIda,
+    vueloVuelta,
+    asientosIda,
+    asientosVuelta,
+    numPasajeros,
+    origen,
+    destino,
+    fechaIda,
+    fechaVuelta,
+    tipo,
+  } = location.state || {};
+
+  // ✅ Validar si llegó sin datos
+  useEffect(() => {
+    if (!vueloIda || !numPasajeros) {
+      alert("No hay información de reserva. Serás redirigido.");
+      navigate("/");
+    }
+  }, [vueloIda, numPasajeros, navigate]);
+
+  // Estado para controlar qué formulario está abierto
+  const [openIndex, setOpenIndex] = useState(0);
+
+  // ✅ Estado para almacenar los datos de todos los pasajeros
+  const [pasajeros, setPasajeros] = useState(
+    Array.from({ length: numPasajeros || 1 }, (_, index) => ({
+      id: index + 1,
+      asientoIda: asientosIda?.[index] || null,
+      asientoVuelta: asientosVuelta?.[index] || null,
+      primerApellido: "",
+      segundoApellido: "",
+      nombres: "",
+      fechaNacimiento: "",
+      tipoDocumento: "",
+      numeroDocumento: "",
+      genero: "",
+      celular: "",
+      email: "",
+      esInfante: "No",
+      validado: false,
+    }))
+  );
+
+  const toggleForm = (index) => {
+    setOpenIndex(openIndex === index ? -1 : index);
   };
+
+  // ✅ Manejar cambios en el formulario
+  const handleInputChange = (index, field, value) => {
+    setPasajeros((prev) =>
+      prev.map((pasajero, i) =>
+        i === index ? { ...pasajero, [field]: value } : pasajero
+      )
+    );
+  };
+
+  // ✅ Validar un pasajero específico
+  const validarPasajero = (e, index) => {
+    e.preventDefault();
+    const pasajero = pasajeros[index];
+
+    // Validaciones básicas
+    if (
+      !pasajero.primerApellido ||
+      !pasajero.nombres ||
+      !pasajero.fechaNacimiento ||
+      !pasajero.tipoDocumento ||
+      !pasajero.numeroDocumento ||
+      !pasajero.genero ||
+      !pasajero.celular ||
+      !pasajero.email
+    ) {
+      alert("Por favor completa todos los campos obligatorios");
+      return;
+    }
+
+    // Validar email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(pasajero.email)) {
+      alert("Por favor ingresa un email válido");
+      return;
+    }
+
+    // Validar celular (10 dígitos)
+    if (pasajero.celular.length < 10) {
+      alert("El número de celular debe tener al menos 10 dígitos");
+      return;
+    }
+
+    // Marcar como validado
+    setPasajeros((prev) =>
+      prev.map((p, i) => (i === index ? { ...p, validado: true } : p))
+    );
+
+    alert(`Datos del pasajero ${index + 1} validados correctamente ✓`);
+
+    // Abrir siguiente formulario si existe
+    if (index < numPasajeros - 1) {
+      setOpenIndex(index + 1);
+    }
+  };
+
+  // ✅ Verificar si todos los pasajeros están validados
+  const todosValidados = pasajeros.every((p) => p.validado);
+
+  // ✅ Continuar al pago
+  const handleContinuar = () => {
+    if (!todosValidados) {
+      alert(
+        "Debes validar los datos de todos los pasajeros antes de continuar"
+      );
+      return;
+    }
+
+    navigate("/pay-celestis", {
+      state: {
+        vueloIda,
+        vueloVuelta,
+        asientosIda,
+        asientosVuelta,
+        pasajeros,
+        origen,
+        destino,
+        fechaIda,
+        fechaVuelta,
+        tipo,
+        numPasajeros,
+      },
+    });
+  };
+
+  if (!vueloIda) return null;
 
   return (
     <>
       <NavBar showImage={true} showBotones={false}>
         <div className="navbar-actions">
-          <Link to="/asientos-vuelo" className="btn-outline">Volver</Link>
+          <button onClick={() => navigate(-1)} className="btn-outline">
+            Volver
+          </button>
         </div>
       </NavBar>
 
@@ -22,76 +156,190 @@ export default function RegistroViajeros() {
       <div className="barra-vuelo">
         <div className="item-vuelo">
           <span className="icon">✈️</span>
-          <strong>Pereira</strong>
-          <span className="icon">✈️</span>
-          <strong>Mexico</strong>
+          <strong>
+            {origen} → {destino}
+          </strong>
         </div>
 
         <div className="divider"></div>
 
         <div className="item-vuelo">
           <span className="icon">📅</span>
-          <strong>jue, 13 de nov</strong>
+          <strong>{fechaIda}</strong>
+          {tipo === "ida-vuelta" && fechaVuelta && (
+            <span> → {fechaVuelta}</span>
+          )}
         </div>
 
         <div className="divider"></div>
 
         <div className="item-vuelo">
           <span className="icon">👤</span>
-          <strong>1 pasajero</strong>
+          <strong>
+            {numPasajeros} pasajero{numPasajeros > 1 ? "s" : ""}
+          </strong>
         </div>
       </div>
 
       {/* Título */}
       <div className="registro-title">
-        <h1>Registro Pasajeros</h1>
+        <h1>Registro de Pasajeros</h1>
+        <p>
+          Complete los datos de {numPasajeros > 1 ? "los" : "su"}{" "}
+          {numPasajeros} pasajero{numPasajeros > 1 ? "s" : ""}
+        </p>
       </div>
 
-      {/* Formulario desplegable */}
-      <div className="registro-card">
-        <button className="btn-toggle" onClick={toggleForm}>
-          {open ? "Ocultar Persona 1" : "Persona 1"}
-        </button>
-
-        {open && (
-          <form className="registro-form">
-            <div className="form-grid">
-              <input type="text" placeholder="Primer Apellido" />
-              <input type="text" placeholder="Segundo Apellido" />
-              <input type="text" placeholder="Nombres" />
-              <input type="date" placeholder="Fecha de Nacimiento" />
-              <select>
-                <option value="">Tipo de documento</option>
-                <option value="CC">Cédula de Ciudadanía</option>
-                <option value="TI">Tarjeta de Identidad</option>
-                <option value="CE">Cédula de Extranjería</option>
-              </select>
-              <input type="text" placeholder="Número de documento" />
-              <select>
-                <option value="">Género</option>
-                <option value="M">Masculino</option>
-                <option value="F">Femenino</option>
-                <option value="O">Otro</option>
-              </select>
-              <input type="text" placeholder="Número de celular" />
-              <input type="email" placeholder="Correo Electrónico" />
-              <select>
-                <option value="">Condición de Infante</option>
-                <option value="Si">Sí</option>
-                <option value="No">No</option>
-              </select>
-            </div>
-
-            <button type="submit" className="btn-outline btn-submit">
-              Validar datos
-            </button>
-          </form>
-        )}
+      {/* Indicador de progreso */}
+      <div className="progreso-container">
+        <p>
+          Validados: <strong>{pasajeros.filter((p) => p.validado).length}</strong>{" "}
+          / {numPasajeros}
+        </p>
       </div>
+
+      {/* Formularios dinámicos según número de pasajeros */}
+      {pasajeros.map((pasajero, index) => (
+        <div key={index} className="registro-card">
+          <button
+            className={`btn-toggle ${pasajero.validado ? "validado" : ""}`}
+            onClick={() => toggleForm(index)}
+          >
+            <span>
+              {pasajero.validado && "✓ "}
+              Pasajero {index + 1}
+              {pasajero.asientoIda && ` - Asiento Ida: ${pasajero.asientoIda}`}
+              {pasajero.asientoVuelta &&
+                ` / Vuelta: ${pasajero.asientoVuelta}`}
+            </span>
+            <span className="toggle-icon">
+              {openIndex === index ? "▲" : "▼"}
+            </span>
+          </button>
+
+          {openIndex === index && (
+            <form
+              className="registro-form"
+              onSubmit={(e) => validarPasajero(e, index)}
+            >
+              <div className="form-grid">
+                <input
+                  type="text"
+                  placeholder="Primer Apellido *"
+                  value={pasajero.primerApellido}
+                  onChange={(e) =>
+                    handleInputChange(index, "primerApellido", e.target.value)
+                  }
+                  required
+                />
+                <input
+                  type="text"
+                  placeholder="Segundo Apellido"
+                  value={pasajero.segundoApellido}
+                  onChange={(e) =>
+                    handleInputChange(index, "segundoApellido", e.target.value)
+                  }
+                />
+                <input
+                  type="text"
+                  placeholder="Nombres *"
+                  value={pasajero.nombres}
+                  onChange={(e) =>
+                    handleInputChange(index, "nombres", e.target.value)
+                  }
+                  required
+                />
+                <input
+                  type="date"
+                  placeholder="Fecha de Nacimiento *"
+                  value={pasajero.fechaNacimiento}
+                  onChange={(e) =>
+                    handleInputChange(index, "fechaNacimiento", e.target.value)
+                  }
+                  required
+                />
+                <select
+                  value={pasajero.tipoDocumento}
+                  onChange={(e) =>
+                    handleInputChange(index, "tipoDocumento", e.target.value)
+                  }
+                  required
+                >
+                  <option value="">Tipo de documento *</option>
+                  <option value="CC">Cédula de Ciudadanía</option>
+                  <option value="TI">Tarjeta de Identidad</option>
+                  <option value="CE">Cédula de Extranjería</option>
+                  <option value="PA">Pasaporte</option>
+                </select>
+                <input
+                  type="text"
+                  placeholder="Número de documento *"
+                  value={pasajero.numeroDocumento}
+                  onChange={(e) =>
+                    handleInputChange(index, "numeroDocumento", e.target.value)
+                  }
+                  required
+                />
+                <select
+                  value={pasajero.genero}
+                  onChange={(e) =>
+                    handleInputChange(index, "genero", e.target.value)
+                  }
+                  required
+                >
+                  <option value="">Género *</option>
+                  <option value="M">Masculino</option>
+                  <option value="F">Femenino</option>
+                  <option value="O">Otro</option>
+                </select>
+                <input
+                  type="tel"
+                  placeholder="Número de celular *"
+                  value={pasajero.celular}
+                  onChange={(e) =>
+                    handleInputChange(index, "celular", e.target.value)
+                  }
+                  required
+                />
+                <input
+                  type="email"
+                  placeholder="Correo Electrónico *"
+                  value={pasajero.email}
+                  onChange={(e) =>
+                    handleInputChange(index, "email", e.target.value)
+                  }
+                  required
+                />
+                <select
+                  value={pasajero.esInfante}
+                  onChange={(e) =>
+                    handleInputChange(index, "esInfante", e.target.value)
+                  }
+                >
+                  <option value="No">No es infante</option>
+                  <option value="Si">Sí es infante</option>
+                </select>
+              </div>
+
+              <button type="submit" className="btn-outline btn-submit">
+                {pasajero.validado ? "✓ Validado" : "Validar datos"}
+              </button>
+            </form>
+          )}
+        </div>
+      ))}
 
       {/* Botón continuar */}
       <div className="continuar-container">
-        <Link to="/pay-celestis" className="btn-outline btn-continuar">Continuar</Link>
+        <button
+          onClick={handleContinuar}
+          className={`btn-outline btn-continuar ${
+            todosValidados ? "" : "disabled"
+          }`}
+          disabled={!todosValidados}
+        >
+          Continuar al pago
+        </button>
       </div>
     </>
   );

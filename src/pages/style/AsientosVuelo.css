@@ -91,3 +91,249 @@
   margin-bottom: 10px;
   font-weight: bold;
 }
+
+
+/* Contador de asientos */
+.contador-asientos {
+  text-align: center;
+  padding: 1rem;
+  background: #f0f8ff;
+  margin: 1rem 2rem;
+  border-radius: 8px;
+  font-size: 1.1rem;
+}
+
+.contador-asientos strong {
+  color: #007bff;
+  font-size: 1.3rem;
+}
+
+/* Asiento seleccionado */
+.asiento.seleccionado {
+  background-color: #4caf50;
+  color: white;
+  border: 2px solid #2e7d32;
+}
+
+/* Asiento deshabilitado */
+.asiento:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Botón continuar */
+.btn-continuar {
+  width: 100%;
+  padding: 1rem;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.btn-continuar:hover:not(:disabled) {
+  background: #0056b3;
+}
+
+.btn-continuar:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+/* Leyenda mejorada */
+.leyenda {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+}
+
+.leyenda-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.cuadro {
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  border: 2px solid #ddd;
+}
+
+.cuadro.libre {
+  background: #f0f0f0;
+}
+
+.cuadro.seleccionado {
+  background: #4caf50;
+  border-color: #2e7d32;
+}
+
+.cuadro.ocupado {
+  background: #e74c3c;
+  border-color: #c0392b;
+}
+
+/* Pasos indicador */
+.pasos-indicador {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: #f8f9fa;
+  gap: 1rem;
+}
+
+.paso {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0.5;
+}
+
+.paso.activo {
+  opacity: 1;
+  font-weight: bold;
+}
+
+.paso.completado {
+  opacity: 0.8;
+  color: #28a745;
+}
+
+.paso .numero {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #ddd;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.paso.activo .numero {
+  background: #007bff;
+  color: white;
+}
+
+.paso.completado .numero {
+  background: #28a745;
+  color: white;
+}
+
+.linea-paso {
+  width: 100px;
+  height: 2px;
+  background: #ddd;
+}
+
+
+.titulo-seleccion {
+  text-align: center;
+  padding: 1.5rem 0;
+}
+
+.titulo-seleccion h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  color: #333;
+}
+
+.contador-asientos {
+  text-align: center;
+  padding: 1rem;
+  background: #f0f8ff;
+  margin: 1rem 2rem;
+  border-radius: 8px;
+}
+
+.contador-asientos p {
+  margin: 0.5rem 0;
+  font-size: 1.1rem;
+}
+
+.contador-asientos strong {
+  color: #007bff;
+  font-size: 1.3rem;
+}
+
+.mensaje-completado {
+  color: #28a745;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+.mensaje-advertencia {
+  color: #ff9800;
+  font-weight: bold;
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+}
+
+.boton-continuar-container {
+  margin-top: 1rem;
+}
+
+.btn-continuar {
+  width: 100%;
+  padding: 1rem;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-continuar:hover:not(:disabled) {
+  background: #0056b3;
+}
+
+.btn-continuar:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Asiento seleccionado */
+.asiento.seleccionado {
+  background-color: #4caf50;
+  color: white;
+  border: 2px solid #2e7d32;
+}
+
+/* Asiento deshabilitado */
+.asiento:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.barra-vuelo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #f8f9fa;
+  border-bottom: 2px solid #dee2e6;
+  gap: 1rem;
+}
+
+.item-vuelo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.divider {
+  width: 2px;
+  height: 30px;
+  background: #dee2e6;
+}

@@ -1,6 +1,8 @@
 import React from "react";
 import "./style/Vuelos.css";
 import NavBar from "../components/NavBar";
+import { Link } from "react-router-dom";
+
 
 export default function MisViajes() {
 
@@ -33,7 +35,7 @@ export default function MisViajes() {
       <NavBar showImage={true} showBotones={false}>
         
         <div className="navbar-actions">
-          <Link to="/inicio -sesion" className="btn-outline">Cerrar Sesion</Link>
+          <Link to="/inicio-sesion" className="btn-outline">Cerrar Sesion</Link>
         </div>
       </NavBar>
 
