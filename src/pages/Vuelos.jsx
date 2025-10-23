@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./style/Vuelos.css";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import NavBar from "../components/NavBar";
+import NavBar from "../components/Navbar";
 
 export default function Vuelos() {
   const navigate = useNavigate();

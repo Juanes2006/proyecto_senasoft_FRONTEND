@@ -1,6 +1,6 @@
 import React from "react";
 import "./style/Vuelos.css";
-import NavBar from "../components/NavBar";
+import NavBar from "../components/Navbar";
 import { Link } from "react-router-dom";
 
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import NavBar from "../components/NavBar";
+import NavBar from "../components/Navbar";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./style/RegistroViajeros.css";
 
